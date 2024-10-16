@@ -1,0 +1,286 @@
+<?php
+
+namespace App\Filament\Resources;
+
+use App\Filament\Resources\ElectricCarResource\Pages;
+use App\Filament\Resources\ElectricCarResource\RelationManagers;
+use App\Models\ElectricCar;
+use Filament\Forms;
+use Filament\Forms\Components\ColorPicker;
+use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Form;
+use Filament\Resources\Resource;
+use Filament\Tables;
+use Filament\Tables\Actions\SelectAction;
+use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Columns\ColorColumn;
+use Filament\Forms\Components\FileUpload;
+class ElectricCarResource extends Resource
+{
+    protected static ?string $model = ElectricCar::class;
+
+    protected static ?string $navigationIcon = 'heroicon-o-bolt';
+
+    protected static ?string $navigationGroup = 'ECar';
+
+    public static function form(Form $form): Form
+    {
+        return $form
+            ->schema([
+                Forms\Components\Grid::make(3)
+                    ->schema([
+                        Forms\Components\Group::make()
+                            ->schema([
+                                Forms\Components\Section::make('Car Details')
+                                    ->schema([
+                                        Forms\Components\Grid::make(2)
+                                            ->schema([
+                                                Forms\Components\Grid::make(3)
+                                                    ->schema([
+                                                        Select::make('brand_id')
+                                                            ->relationship('brand', 'name')
+                                                            ->required(),
+                                                        TextInput::make('model')
+                                                            ->required()
+                                                            ->live(onBlur: true)
+                                                            ->afterStateUpdated(function (string $operation, $state, Forms\Set $set) {
+                                                                if ($operation !== 'create') {
+                                                                    return;
+                                                                }
+                                                                $set('slug', \Illuminate\Support\Str::slug($state));
+                                                            }),
+                                                        TextInput::make('slug')
+                                                            ->required()
+                                                            ->disabled()
+                                                            ->unique(ElectricCar::class, 'slug', ignoreRecord: true),
+                                                    ]),
+                                                Forms\Components\Grid::make(3)
+                                                    ->schema([
+                                                        Select::make('year')
+                                                            ->options(array_combine(range(now()->year, 1900), range(now()->year, 1900)))
+                                                            ->required()
+                                                            ->native(false),
+                                                        Select::make('condition')
+                                                            ->options([
+                                                                'new' => 'New',
+                                                                'used' => 'Used',
+                                                                'refurbished' => 'Refurbished',
+                                                            ]),
+                                                        Select::make('body_type')
+                                                            ->options([
+                                                                'sedan' => 'Sedan',
+                                                                'hatchback' => 'Hatchback',
+                                                                'suv' => 'SUV',
+                                                                'crossover' => 'Crossover',
+                                                                'pickup' => 'Pickup',
+                                                                'van' => 'Van',
+                                                                'wagon' => 'Wagon',
+                                                                'coupe' => 'Coupe',
+                                                                'convertible' => 'Convertible',
+                                                            ]),
+                                                    ]),
+                                                Forms\Components\Grid::make(3)
+                                                    ->schema([
+                                                        TextInput::make('mileage')
+                                                            ->helperText('The mileage of the car in kilometers')
+                                                            ->numeric(),
+                                                        Select::make('transmission')
+                                                            ->options([
+                                                                'automatic' => 'Automatic',
+                                                            ]),
+                                                        Select::make('drivetrain')
+                                                            ->options([
+                                                                'fwd' => 'Front-Wheel Drive',
+                                                                'rwd' => 'Rear-Wheel Drive',
+                                                                'awd' => 'All-Wheel Drive',
+                                                                '4wd' => '4-Wheel Drive',
+                                                                'aWD' => 'AWD',
+                                                            ]),
+                                                    ]),
+                                            ]),
+                                    ]),
+                                Forms\Components\Section::make('Performance')
+                                    ->schema([
+                                        Forms\Components\Grid::make(2)
+                                            ->schema([
+                                                TextInput::make('range_km')
+                                                    ->helperText('The range of the car in kilometers')
+                                                    ->placeholder('Enter the range in kilometers')
+                                                    ->label('Range (km)')
+                                                    ->numeric(),
+                                                TextInput::make('battery_capacity')
+                                                    ->helperText('The battery capacity of the car in kilowatt-hours')
+                                                    ->placeholder('Enter the battery capacity in kWh')
+                                                    ->label('Battery Capacity (kWh)')
+                                                    ->numeric(),
+                                                TextInput::make('horsepower')
+                                                    ->placeholder('Enter the horsepower of the car')
+                                                    ->helperText('The horsepower of the car in horsepower')
+                                                    ->label('Horsepower (hp)')
+                                                    ->numeric(),
+                                                TextInput::make('acceleration')
+                                                    ->helperText('The acceleration of the car from 0 to 100 kilometers per hour in seconds')
+                                                    ->label('Acceleration (0-100 km/h)')
+                                                    ->numeric(),
+                                                TextInput::make('top_speed_kmh')
+                                                    ->helperText('The top speed of the car in kilometers per hour')
+                                                    ->label('Top Speed (km/h)')
+                                                    ->numeric(),
+                                                TextInput::make('mpge_city')
+                                                    ->helperText('The city fuel economy of the car in miles per gallon equivalent')
+                                                    ->label('MPGe City')
+                                                    ->numeric(),
+                                                TextInput::make('mpge_highway')
+                                                    ->helperText('The highway fuel economy of the car in miles per gallon equivalent')
+                                                    ->label('MPGe Highway')
+                                                    ->numeric(),
+                                            ]),
+                                    ]),
+                                Forms\Components\Section::make('Charging')
+                                    ->schema([
+                                        Forms\Components\Grid::make(2)
+                                            ->schema([
+                                                TextInput::make('charging_time_ac')
+                                                    ->helperText('The charging time of the car on AC in hours')
+                                                    ->label('Charging Time (AC)')
+                                                    ->numeric(),
+                                                TextInput::make('charging_time_dc')
+                                                    ->helperText('The charging time of the car on DC in hours')
+                                                    ->label('Charging Time (DC)')
+                                                    ->numeric(),
+                                            ]),
+                                    ]),
+                                Forms\Components\Section::make('Additional Details')
+                                    ->schema([
+                                        RichEditor::make('description')
+                                            ->label('Description')
+                                            ->columnSpanFull(),
+                                    ]),
+                            ])
+                            ->columnSpan(2),
+                        Forms\Components\Group::make()
+                            ->schema([
+                                Forms\Components\Section::make('Pricing')
+                                    ->schema([
+                                        TextInput::make('msrp')
+                                            ->required()
+                                            ->label('MSRP')
+                                            ->prefix('EGP')
+                                            ->helperText('The original price of the car before any discounts')
+                                            ->numeric(),
+                                        TextInput::make('offer_price')
+                                            ->required()
+                                            ->label('Offer Price')
+                                            ->prefix('EGP')
+                                            ->helperText('The price after any discounts')
+                                            ->numeric(),
+                                    ])->columns(2),
+                                Forms\Components\Section::make('Colors')
+                                ->schema([
+                                    ColorPicker::make('exterior_color')
+                                        ->label('Exterior Color')
+                                        ->required(),
+                                    ColorPicker::make('interior_color')
+                                        ->label('Interior Color')
+                                        ->required(),
+                                ])->columns(2),
+                                Forms\Components\Section::make('Features')
+                                    ->schema([
+                                        Forms\Components\TagsInput::make('features'),
+                                    ]),
+                            ])
+                            ->columnSpan(1),
+                    ]),
+            Forms\Components\Section::make('Images')
+                ->schema([
+                    Forms\Components\Repeater::make('images')
+                    ->relationship()
+                    ->schema([
+                        Forms\Components\FileUpload::make('image_path')
+                            ->image()
+                            ->directory('electric-car-images')
+                            ->required(),
+                    ])
+                    ->columns(2)
+                    ->columnSpanFull(),
+                ])
+            ]);
+    }
+
+    public static function table(Table $table): Table
+    {
+        return $table
+            ->columns([
+                ImageColumn::make('images.0.image_path')
+                    ->label('Image')
+                    ->circular(),
+                TextColumn::make('brand.name')
+                    ->label('Brand')
+                    ->toggleable(),
+                TextColumn::make('model')
+                    ->label('Model'),
+                TextColumn::make('year')
+                    ->label('Year'),
+                TextColumn::make('condition')
+                    ->label('Condition'),
+                TextColumn::make('body_type')
+                    ->label('Body Type'),
+                TextColumn::make('mileage')
+                    ->label('Mileage'),
+                TextColumn::make('transmission')
+                    ->label('Transmission'),
+                TextColumn::make('drivetrain')
+                    ->label('Drivetrain'),
+                ColorColumn::make('exterior_color')
+                    ->label('Exterior Color'),
+                ColorColumn::make('interior_color')
+                    ->label('Interior Color'),
+                TextColumn::make('msrp')
+                    ->label('MSRP')
+                    ->money('EGP'),
+                TextColumn::make('offer_price')
+                    ->label('Offer Price')
+                    ->money('EGP'),
+            ])
+            ->filters([
+                //
+            ])
+            ->actions([
+
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\ViewAction::make(),
+                    Tables\Actions\EditAction::make(),
+                    Tables\Actions\DeleteAction::make(),
+                ])
+            ])
+            ->bulkActions([
+                Tables\Actions\BulkActionGroup::make([
+                    Tables\Actions\DeleteBulkAction::make(),
+                ]),
+            ]);
+    }
+
+    public static function getRelations(): array
+    {
+        return [
+            //
+        ];
+    }
+
+    public static function getPages(): array
+    {
+        return [
+            'index' => Pages\ListElectricCars::route('/'),
+            'create' => Pages\CreateElectricCar::route('/create'),
+            'view' => Pages\ViewElectricCar::route('/{record}'),
+            'edit' => Pages\EditElectricCar::route('/{record}/edit'),
+        ];
+    }
+}
