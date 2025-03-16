@@ -387,19 +387,19 @@ class ElectricCarResource extends Resource
     {
         return $table
             ->headerActions([
-                Tables\Actions\ImportAction::make()
-                    ->importer(ElectricCarsImport::class)
-                    ->chunkSize(100)
-                    ->label('Import Cars')
-                    ->options([
-                        'update_existing' => true,
-                        'identify_by' => ['model', 'year'],
-                    ]),
-                Tables\Actions\Action::make('export_template')
-                    ->label('Export Empty Template')
-                    ->action(function () {
-                        return Excel::download(new ElectricCarsTemplateExport, 'electric-cars-template.xlsx');
-                    }),
+                // Tables\Actions\ImportAction::make()
+                //     ->importer(ElectricCarsImport::class)
+                //     ->chunkSize(100)
+                //     ->label('Import Cars')
+                //     ->options([
+                //         'update_existing' => true,
+                //         'identify_by' => ['model', 'year'],
+                //     ]),
+                // Tables\Actions\Action::make('export_template')
+                //     ->label('Export Empty Template')
+                //     ->action(function () {
+                //         return Excel::download(new ElectricCarsTemplateExport, 'electric-cars-template.xlsx');
+                //     }),
             ])
             ->columns([
                 ImageColumn::make('images.0.image_path')

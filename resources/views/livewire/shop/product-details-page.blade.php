@@ -1,3 +1,12 @@
+@section('title', $product->name)
+@section('description', Str::limit(strip_tags($product->description), 150))
+@section('og:title',  $product->name)
+@section('og:description', Str::limit(strip_tags($product->description), 150))
+@section('og:image', asset('storage/' .$product->images[0]) )
+@section('twitter:title',  $product->name)
+@section('twitter:description', Str::limit(strip_tags($product->description), 150))
+@section('twitter:image', asset('storage/' .$product->images[0]) )
+
 <div>
     <div class="product-details-one lg-container pt-100 lg-pt-150  pb-100 rtl text-right">
         <div class="breadcrumb-area pb-70">

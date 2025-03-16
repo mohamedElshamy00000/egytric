@@ -1,3 +1,13 @@
+@section('title', $car->name)
+@section('description', Str::limit(strip_tags($car->description), 150))
+@section('keywords', implode(',', $car->features ?? []))
+@section('og:title',  $car->name)
+@section('og:description', Str::limit(strip_tags($car->description), 150))
+@section('og:image', asset('storage/' .$car->images[0]) )
+@section('twitter:title',  $car->name)
+@section('twitter:description', Str::limit(strip_tags($car->description), 150))
+@section('twitter:image', asset('storage/' .$car->images[0]) )
+
 <div>
 
     <div class="product-details-one lg-container mt-150 rtl">

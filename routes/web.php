@@ -31,6 +31,7 @@ use App\Livewire\ContactUsPage;
 use App\Livewire\FandQ;
 use App\Livewire\MyCarOrderPage;
 use App\Models\ElectricCar;
+use Illuminate\Support\Facades\File;
 
 Route::get('/', HomePage::class)->name('home');
 
@@ -88,3 +89,22 @@ Route::middleware('auth')->group(function () {
 
 
 Route::get('/electric-cars/export-template', [ElectricCarController::class, 'exportTemplate'])->name('electric-cars.export-template');
+
+Route::get('/run-storage-link', function () {
+    try {
+        $targetFolder = storage_path('app/public');
+        $linkFolder = public_path('storage');
+
+        // Remove existing directory if it exists
+        if (file_exists($linkFolder)) {
+            File::deleteDirectory($linkFolder);
+        }
+
+        // Copy the directory
+        File::copyDirectory($targetFolder, $linkFolder);
+
+        return 'Storage directory has been copied successfully.';
+    } catch (\Exception $e) {
+        return 'Error: ' . $e->getMessage();
+    }
+});

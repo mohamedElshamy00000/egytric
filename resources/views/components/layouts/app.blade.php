@@ -3,15 +3,29 @@
     <head>
         <meta charset="utf-8">
 
-        <title>{{ $title ?? 'EgyTric' }}</title>
+        {{-- <title>{{ $title ?? 'EgyTric' }}</title> --}}
 
-		<meta name="keywords" content="Digital marketing agency, Digital marketing company, Digital marketing services, sass, software company">
-		<meta name="description" content="Deski is a creative saas and software html template designed for saas and software Agency websites.">
-      	<meta property="og:site_name" content="deski">
-      	<meta property="og:url" content="https://heloshape.com/">
-      	<meta property="og:type" content="website">
-      	<meta property="og:title" content="Deski: creative saas and software html template">
-		<meta name='og:image' content='images/assets/ogg.png'>
+        <title>@yield('title', $title ?? 'EgyTric')</title>
+
+        <!-- SEO Meta Tags -->
+        <meta name="description" content="@yield('description', 'EgyTric')">
+        <meta name="keywords" content="@yield('keywords', 'EgyTric')">
+
+        <!-- Open Graph Tags -->
+        <meta property="og:title" content="@yield('og:title', 'EgyTric')" />
+        <meta property="og:description" content="@yield('og:description', 'EgyTric')" />
+        <meta property="og:image" content="@yield('og:image', asset('frontend/images/imageslogo.png'))" />
+
+        <!-- Twitter Card Tags -->
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="@yield('twitter:title', 'EgyTric')">
+        <meta name="twitter:description" content="@yield('twitter:description', 'EgyTric')">
+        <meta name="twitter:image" content="@yield('twitter:image', asset('frontend/images/imageslogo.png'))">
+
+        <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+        {{-- ----------- --}}
 		<!-- For IE -->
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<!-- For Resposive Device -->
