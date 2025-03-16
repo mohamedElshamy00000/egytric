@@ -14,6 +14,8 @@ class Product extends Model
 
     protected $casts = [
         'images' =>'array',
+        'features' => 'array',
+
     ];
 
     protected static function boot()
@@ -42,5 +44,10 @@ class Product extends Model
     public function orderItems()
     {
         return $this->hasMany(OrderItem::class);
+    }
+
+    public function ratings()
+    {
+        return $this->hasMany(ProductRating::class);
     }
 }

@@ -34,7 +34,7 @@ return new class extends Migration
             $table->string('exterior_color'); // لون الخارج
             $table->string('interior_color')->nullable(); // اللون الداخلي (تم تصحيح الإملاء)
             $table->json('features')->nullable(); // المواصفات (تم تغييرها إلى json وجعلها nullable)
-
+            $table->boolean('is_featured')->default(false);
             $table->integer('top_speed_kmh')->nullable();
             $table->string('drivetrain')->nullable(); // نوع القوة
             $table->longText('description')->nullable();

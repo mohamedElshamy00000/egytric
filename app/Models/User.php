@@ -13,6 +13,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Filament\Models\Contracts\HasAvatar;
 use Illuminate\Support\Facades\Storage;
 use Firefly\FilamentBlog\Traits\HasBlog;
+use Filament\Panel;
 
 class User extends Authenticatable implements FilamentUser, HasAvatar
 {
@@ -20,6 +21,11 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
     use HasBlog;
     use HasRoles;
     use HasPanelShield;
+
+    public function canAccessPanel(Panel $panel): bool
+    {
+        return str_ends_with($this->email, '@egytric.com') && $this->hasVerifiedEmail();
+    }
 
     public function canComment(): bool
     {
@@ -36,6 +42,12 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
     {
         return $this->hasMany(Order::class);
     }
+
+    public function ratings()
+    {
+        return $this->hasMany(CarRating::class);
+    }
+
     /**
      * The attributes that are mass assignable.
      *

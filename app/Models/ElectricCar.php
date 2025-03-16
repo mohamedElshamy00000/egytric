@@ -25,6 +25,7 @@ class ElectricCar extends Model
         'charging_time_dc' => 'integer',
         'mileage' => 'integer',
         'features' => 'array',
+        'charging_ports' => 'array',
     ];
 
     public function getFullNameAttribute()
@@ -45,6 +46,11 @@ class ElectricCar extends Model
     public function images()
     {
         return $this->hasMany(ElectricCarImages::class);
+    }
+
+    public function ratings()
+    {
+        return $this->hasMany(CarRating::class);
     }
 
     public function getDiscountAttribute()

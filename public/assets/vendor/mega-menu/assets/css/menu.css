@@ -51,7 +51,7 @@
 }
 .navbar-toggler::after {
   -webkit-transform: translate3d(0, 8px, 0) scale3d(1, 1, 1);
-   transform: translate3d(0, 8px, 0) scale3d(1, 1, 1); 
+   transform: translate3d(0, 8px, 0) scale3d(1, 1, 1);
 }
 .navbar-toggler.open span {opacity: 0;}
 .navbar-toggler.open::before {
@@ -78,7 +78,7 @@
 .theme-menu-two .navbar .navbar-toggler {background: var(--red-light);}
 /*Menu Four*/
 .theme-menu-four .navbar .navbar-toggler {background: var(--vin-red);}
-.navbar .navbar-nav {font-family: 'Rubik', sans-serif;}
+.navbar .navbar-nav {font-family: 'Cairo', sans-serif;}
 .navbar {
   padding: 0;
   z-index: 1;

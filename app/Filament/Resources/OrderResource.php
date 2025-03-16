@@ -61,8 +61,8 @@ class OrderResource extends Resource
                             Select::make('payment_method')
                                 ->label('Payment Method')
                                 ->options([
-                                    'cash' => 'Cash',
-                                    'visa' => 'Visa',
+                                    'cashOnDelivery' => 'Cash On Delivery',
+                                    'creditCard' => 'Credit Card',
                                     'mastercard' => 'Mastercard',
                                 ])
                                 ->required(),
@@ -228,8 +228,8 @@ class OrderResource extends Resource
                     ->label('Payment Method')
                     ->sortable()
                     ->icon(fn (string $state): string => match ($state) {
-                        'cash' => 'heroicon-o-banknotes',
-                        'visa' => 'heroicon-o-credit-card',
+                        'cashOnDelivery' => 'heroicon-o-banknotes',
+                        'creditCard' => 'heroicon-o-credit-card',
                         'mastercard' => 'heroicon-o-currency-dollar',
                         default => 'heroicon-o-question-mark-circle',
                     }),

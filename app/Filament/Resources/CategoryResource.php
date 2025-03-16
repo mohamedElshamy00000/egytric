@@ -29,6 +29,8 @@ class CategoryResource extends Resource
 
     protected static ?int $navigationSort = 3;
 
+    protected static ?string $modelLabel = 'Product Category';
+
     protected static ?string $navigationGroup = 'Store';
 
     protected static ?string $recordTitleAttribute = 'name';
@@ -112,5 +114,10 @@ class CategoryResource extends Resource
             'create' => Pages\CreateCategory::route('/create'),
             'edit' => Pages\EditCategory::route('/{record}/edit'),
         ];
+    }
+
+    public static function getSlug(): string
+    {
+        return 'product-categories';
     }
 }

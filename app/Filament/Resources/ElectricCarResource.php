@@ -22,6 +22,17 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\ColorColumn;
 use Filament\Forms\Components\FileUpload;
+use Filament\Tables\Columns\IconColumn;
+use Filament\Actions\ImportAction;
+use Filament\Actions\ExportAction;
+
+use App\Filament\Exports\ElectricCarsExport;
+use App\Filament\Imports\ElectricCarsImport;
+
+use Filament\Pages\Actions\Action;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\ElectricCarsTemplateExport;
+
 class ElectricCarResource extends Resource
 {
     protected static ?string $model = ElectricCar::class;
@@ -51,14 +62,10 @@ class ElectricCarResource extends Resource
                                                             ->required()
                                                             ->live(onBlur: true)
                                                             ->afterStateUpdated(function (string $operation, $state, Forms\Set $set) {
-                                                                if ($operation !== 'create') {
-                                                                    return;
-                                                                }
                                                                 $set('slug', \Illuminate\Support\Str::slug($state));
                                                             }),
                                                         TextInput::make('slug')
                                                             ->required()
-                                                            ->disabled()
                                                             ->unique(ElectricCar::class, 'slug', ignoreRecord: true),
                                                     ]),
                                                 Forms\Components\Grid::make(3)
@@ -157,6 +164,160 @@ class ElectricCarResource extends Resource
                                                     ->numeric(),
                                             ]),
                                     ]),
+                                Forms\Components\Section::make('Home Charging Information')
+                                    ->schema([
+                                        TextInput::make('home_charger_type')
+                                            ->helperText('The type of home charger used for the electric car, such as Level 1, Level 2, or DC fast charger')
+                                            ->label('Home Charger Type')
+                                            ->nullable(),
+                                        TextInput::make('home_charging_power')
+                                            ->label('Home Charging Power (kW)')
+                                            ->helperText('The power of the home charger in kilowatts')
+                                            ->nullable()
+                                            ->numeric(),
+                                        TextInput::make('home_charging_time_hours')
+                                            ->label('Home Charging Time (Hours)')
+                                            ->helperText('The time it takes to charge the car on AC')
+                                            ->nullable()
+                                            ->numeric(),
+                                        Forms\Components\Checkbox::make('includes_home_charger')
+                                            ->label('Includes Home Charger')
+                                            ->helperText('Whether the car includes a home charger')
+                                            ->default(false),
+                                    ])->columns(2),
+                                Forms\Components\Section::make('Battery Information')
+                                    ->schema([
+                                        TextInput::make('battery_type')
+                                            ->label('Battery Type')
+                                            ->helperText('The type of battery used in the car, such as Lithium-Ion, Lithium-Ferro-Phosphate, or Lithium-Iron-Phosphate')
+                                            ->nullable(),
+                                        TextInput::make('battery_modules')
+                                            ->label('Battery Modules')
+                                            ->helperText('The number of battery modules in the car')
+                                            ->nullable()
+                                            ->numeric(),
+                                        TextInput::make('battery_cells')
+                                            ->label('Battery Cells')
+                                            ->helperText('The number of battery cells in the car')
+                                            ->nullable()
+                                            ->numeric(),
+                                        TextInput::make('battery_voltage')
+                                            ->label('Battery Voltage (V)')
+                                            ->helperText('The voltage of the battery in volts')
+                                            ->nullable()
+                                            ->numeric(),
+                                        TextInput::make('battery_cycles')
+                                            ->label('Battery Cycles')
+                                            ->helperText('The number of cycles the battery can go through before it needs to be replaced')
+                                            ->nullable()
+                                            ->numeric(),
+                                        TextInput::make('battery_warranty')
+                                            ->label('Battery Warranty')
+                                            ->helperText('The warranty of the battery in years')
+                                            ->nullable(),
+                                        TextInput::make('battery_degradation_rate')
+                                            ->label('Battery Degradation Rate (%)')
+                                            ->helperText('The rate at which the battery degrades over time')
+                                            ->nullable()
+                                            ->numeric(),
+                                        TextInput::make('battery_thermal_management')
+                                            ->label('Battery Thermal Management')
+                                            ->helperText('The thermal management system of the battery')
+                                            ->nullable()
+                                            ->numeric(),
+                                    ])->columns(2),
+                                Forms\Components\Section::make('Safety Features')
+                                    ->schema([
+                                        TextInput::make('airbag_count')
+                                            ->label('Airbag Count')
+                                            ->helperText('The number of airbags in the car')
+                                            ->nullable()
+                                            ->numeric(),
+                                        TextInput::make('crash_test_rating')
+                                            ->label('Crash Test Rating')
+                                            ->helperText('The rating of the car in crash tests')
+                                            ->nullable(),
+                                        Forms\Components\Checkbox::make('has_pedestrian_alert')
+                                            ->label('Has Pedestrian Alert')
+                                            ->helperText('Whether the car has a pedestrian alert system')
+                                            ->default(false),
+                                        Forms\Components\Checkbox::make('has_battery_protection')
+                                            ->label('Has Battery Protection')
+                                            ->helperText('Whether the car has a battery protection system')
+                                            ->default(false),
+                                        Forms\Components\Checkbox::make('has_lane_departure')
+                                            ->label('Has Lane Departure')
+                                            ->helperText('Whether the car has a lane departure system')
+                                            ->default(false),
+                                        Forms\Components\Checkbox::make('has_blind_spot')
+                                            ->label('Has Blind Spot Detection')
+                                            ->helperText('Whether the car has a blind spot detection system')
+                                            ->default(false),
+                                        Forms\Components\Checkbox::make('has_emergency_brake')
+                                            ->label('Has Emergency Brake')
+                                            ->helperText('Whether the car has an emergency brake system')
+                                            ->default(false),
+                                    ])->columns(2),
+                                Forms\Components\Section::make('Dimensions and Weight')
+                                    ->schema([
+                                        Forms\Components\Checkbox::make('has_fast_charging')
+                                            ->label('Has Fast Charging')
+                                            ->helperText('Whether the car has a fast charging system')
+                                            ->default(false)
+                                            ->columnSpanFull(),
+                                        TextInput::make('length_mm')
+                                            ->label('Length (mm)')
+                                            ->nullable()
+                                            ->numeric(),
+                                        TextInput::make('width_mm')
+                                            ->label('Width (mm)')
+                                            ->nullable()
+                                            ->numeric(),
+                                        TextInput::make('wheelbase_mm')
+                                            ->label('Wheelbase (mm)')
+                                            ->nullable()
+                                            ->numeric(),
+                                        TextInput::make('ground_clearance_mm')
+                                            ->label('Ground Clearance (mm)')
+                                            ->nullable()
+                                            ->numeric(),
+                                        TextInput::make('cargo_volume_l')
+                                            ->label('Cargo Volume (L)')
+                                            ->nullable()
+                                            ->numeric(),
+                                        TextInput::make('curb_weight_kg')
+                                            ->label('Curb Weight (kg)')
+                                            ->nullable()
+                                            ->numeric(),
+                                        TextInput::make('gross_weight_kg')
+                                            ->label('Gross Weight (kg)')
+                                            ->nullable()
+                                            ->numeric(),
+                                        TextInput::make('payload_capacity_kg')
+                                            ->label('Payload Capacity (kg)')
+                                            ->nullable()
+                                            ->numeric(),
+                                        TextInput::make('seating_capacity')
+                                            ->label('Seating Capacity')
+                                            ->nullable()
+                                            ->numeric(),
+                                        TextInput::make('power_consumption_kwh_100km')
+                                            ->label('Power Consumption (kWh/100km)')
+                                            ->nullable()
+                                            ->numeric(),
+                                        TextInput::make('regenerative_levels')
+                                            ->label('Regenerative Levels')
+                                            ->nullable()
+                                            ->numeric(),
+                                        TextInput::make('max_regenerative_power')
+                                            ->label('Max Regenerative Power')
+                                            ->nullable()
+                                            ->numeric(),
+                                        Forms\Components\Textarea::make('charging_ports')
+                                            ->label('Charging Ports')
+                                            ->columnSpanFull()
+                                            ->nullable(),
+                                    ])->columns(2),
                                 Forms\Components\Section::make('Additional Details')
                                     ->schema([
                                         RichEditor::make('description')
@@ -181,6 +342,11 @@ class ElectricCarResource extends Resource
                                             ->prefix('EGP')
                                             ->helperText('The price after any discounts')
                                             ->numeric(),
+
+                                        Forms\Components\Checkbox::make('is_available')
+                                            ->label('Is Available')
+                                            ->helperText('Whether the car is available for sale')
+                                            ->default(true),
                                     ])->columns(2),
                                 Forms\Components\Section::make('Colors')
                                 ->schema([
@@ -195,28 +361,46 @@ class ElectricCarResource extends Resource
                                     ->schema([
                                         Forms\Components\TagsInput::make('features'),
                                     ]),
+
+                                Forms\Components\Section::make('Images')
+                                    ->schema([
+                                        Forms\Components\Repeater::make('images')
+                                        ->relationship()
+                                        ->schema([
+                                            Forms\Components\FileUpload::make('image_path')
+                                                ->image()
+                                                ->directory('electric-car-images')
+                                                ->required(),
+                                        ])
+                                        ->columns(1)
+                                        ->columnSpanFull(),
+                                    ])
+
                             ])
                             ->columnSpan(1),
-                    ]),
-            Forms\Components\Section::make('Images')
-                ->schema([
-                    Forms\Components\Repeater::make('images')
-                    ->relationship()
-                    ->schema([
-                        Forms\Components\FileUpload::make('image_path')
-                            ->image()
-                            ->directory('electric-car-images')
-                            ->required(),
                     ])
-                    ->columns(2)
-                    ->columnSpanFull(),
-                ])
+                    ->columnSpan(2),
             ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table
+            ->headerActions([
+                Tables\Actions\ImportAction::make()
+                    ->importer(ElectricCarsImport::class)
+                    ->chunkSize(100)
+                    ->label('Import Cars')
+                    ->options([
+                        'update_existing' => true,
+                        'identify_by' => ['model', 'year'],
+                    ]),
+                Tables\Actions\Action::make('export_template')
+                    ->label('Export Empty Template')
+                    ->action(function () {
+                        return Excel::download(new ElectricCarsTemplateExport, 'electric-cars-template.xlsx');
+                    }),
+            ])
             ->columns([
                 ImageColumn::make('images.0.image_path')
                     ->label('Image')
@@ -224,6 +408,9 @@ class ElectricCarResource extends Resource
                 TextColumn::make('brand.name')
                     ->label('Brand')
                     ->toggleable(),
+                IconColumn::make('is_available')
+                    ->label('Is Available')
+                    ->boolean(),
                 TextColumn::make('model')
                     ->label('Model'),
                 TextColumn::make('year')
@@ -279,7 +466,6 @@ class ElectricCarResource extends Resource
         return [
             'index' => Pages\ListElectricCars::route('/'),
             'create' => Pages\CreateElectricCar::route('/create'),
-            'view' => Pages\ViewElectricCar::route('/{record}'),
             'edit' => Pages\EditElectricCar::route('/{record}/edit'),
         ];
     }

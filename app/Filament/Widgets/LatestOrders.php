@@ -45,12 +45,12 @@ class LatestOrders extends BaseWidget
                 Tables\Columns\TextColumn::make('payment_method')
                     ->badge()
                     ->color(fn (string $state): string => match ($state) {
-                        'cash' => 'info',
-                        'visa' => 'success',
+                        'cashOnDelivery' => 'info',
+                        'creditCard' => 'success',
                         'mastercard' => 'danger',
                     })->icon(fn (string $state): string => match ($state) {
-                        'cash' => 'heroicon-o-banknotes',
-                        'visa' => 'heroicon-o-credit-card',
+                        'cashOnDelivery' => 'heroicon-o-banknotes',
+                        'creditCard' => 'heroicon-o-credit-card',
                         'mastercard' => 'heroicon-o-currency-dollar',
                     }),
                 Tables\Columns\TextColumn::make('payment_status')

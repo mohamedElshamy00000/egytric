@@ -36,7 +36,7 @@ class AdminPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::Amber,
             ])
-
+            // ->plugin(\TomatoPHP\FilamentArtisan\FilamentArtisanPlugin::make())
             ->brandLogo(asset('logo.png'))
             ->brandLogoHeight('2rem')
             ->favicon(asset('logo.png'))
@@ -44,7 +44,7 @@ class AdminPanelProvider extends PanelProvider
             ->colors([
                 'danger' => Color::Rose,
                 'info' => Color::Blue,
-                'primary' => '#00eebc',
+                'primary' => '#b6f119',
                 'success' => Color::Emerald,
                 'warning' => Color::Orange,
             ])
@@ -61,6 +61,11 @@ class AdminPanelProvider extends PanelProvider
                 // Widgets\FilamentInfoWidget::class,
             ])
             ->databaseNotifications()->databaseNotificationsPolling('30s')
+            ->plugin(
+                \TomatoPHP\FilamentSettingsHub\FilamentSettingsHubPlugin::make()
+                    ->allowSiteSettings()
+                    ->allowSocialMenuSettings()
+            )
             ->plugins([
                 Blog::make(),
                 FilamentEditProfilePlugin::make()

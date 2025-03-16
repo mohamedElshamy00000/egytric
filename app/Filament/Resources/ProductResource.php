@@ -88,6 +88,15 @@ class ProductResource extends Resource
                             ->required()
                             ->helperText('Select this option to display the product in the Sale section.')
                             ->default(false),
+
+                        Toggle::make('free_delivery')
+                            ->required(),
+                        Toggle::make('free_return')
+                            ->required(),
+                        Toggle::make('cash_on_delivery')
+                            ->required(),
+                        Toggle::make('installment_plan')
+                            ->required(),
                     ]),
                     Section::make('Association')->schema([
                         Select::make('category_id')
@@ -100,6 +109,10 @@ class ProductResource extends Resource
                             ->searchable()
                             ->preload()
                             ->required(),
+                            Forms\Components\Section::make('Features')
+                            ->schema([
+                                Forms\Components\TagsInput::make('features'),
+                            ]),
                     ]),
 
                 ])->columnSpan(1),
