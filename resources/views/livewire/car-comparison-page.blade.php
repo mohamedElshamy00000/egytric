@@ -15,7 +15,7 @@
                         <nav aria-label="breadcrumb rtl">
                             <ol class="breadcrumb m-auto bg-transparent justify-content-center">
                                 <li class="breadcrumb-item active" aria-current="page">جدول مقارنة السيارات</li>
-                                <li class="breadcrumb-item"><a href="index.html">الصفحة الرئيسية</a></li>
+                                <li class="breadcrumb-item"><a href="{{ route('home') }}">الصفحة الرئيسية</a></li>
                             </ol>
                         </nav>
                     </div>

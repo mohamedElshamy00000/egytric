@@ -98,8 +98,8 @@
                                     <div class="d-flex align-items-top car-feature-box">
                                         <i class="fa fa-road mb-2 ml-2 car-icon" aria-hidden="true"></i>
                                         <div class="info-meta">
-                                            <h5>المدى</h5>
-                                            <span class="font-rubik">{{ $car->range_km }} كم</span>
+                                            <h6>المدى</h6>
+                                            <span class="font-rubik h6">{{ $car->range_km }} كم</span>
                                         </div>
                                     </div>
                                 </div>
@@ -107,8 +107,8 @@
                                     <div class="d-flex align-items-top car-feature-box">
                                         <i class="fa fa-battery-full mb-2 ml-2 car-icon" aria-hidden="true"></i>
                                         <div class="info-meta">
-                                            <h5>سعة البطارية</h5>
-                                            <span class="font-rubik">{{ $car->battery_capacity }} كيلوواط ساعة</span>
+                                            <h6>سعة البطارية</h6>
+                                            <span class="font-rubik h6">{{ $car->battery_capacity }} كيلوواط ساعة</span>
                                         </div>
                                     </div>
                                 </div>
@@ -116,8 +116,8 @@
                                     <div class="d-flex align-items-top car-feature-box">
                                         <i class="fa fa-bolt mb-2 ml-2 car-icon" aria-hidden="true"></i>
                                         <div class="info-meta">
-                                            <h5>القوة الحصانية</h5>
-                                            <span class="font-rubik">{{ $car->horsepower }} حصان</span>
+                                            <h6>القوة الحصانية</h6>
+                                            <span class="font-rubik h6">{{ $car->horsepower }} حصان</span>
                                         </div>
                                     </div>
                                 </div>
@@ -125,8 +125,8 @@
                                     <div class="d-flex align-items-top car-feature-box">
                                         <i class="fa fa-tachometer mb-2 ml-2 car-icon" aria-hidden="true"></i>
                                         <div class="info-meta">
-                                            <h5>التسارع </h5>
-                                            <span class="font-rubik">{{ $car->acceleration }} ث (0-100 كم/س)</span>
+                                            <h6>التسارع </h6>
+                                            <span class="font-rubik h6">{{ $car->acceleration }} ث (0-100 كم/س)</span>
                                         </div>
                                     </div>
                                 </div>
@@ -134,8 +134,8 @@
                                     <div class="d-flex align-items-top car-feature-box">
                                         <i class="fa fa-road mb-2 ml-2 car-icon" aria-hidden="true"></i>
                                         <div class="info-meta">
-                                            <h5>كفاءة الوقود على الطريق</h5>
-                                            <span class="font-rubik">{{ $car->mpge_highway }} ميل/جالون</span>
+                                            <h6>كفاءة الوقود على الطريق</h6>
+                                            <span class="font-rubik h6">{{ $car->mpge_highway }} </span>
                                         </div>
                                     </div>
                                 </div>
@@ -143,8 +143,8 @@
                                     <div class="d-flex align-items-top car-feature-box">
                                         <i class="fa fa-road mb-2 ml-2 car-icon" aria-hidden="true"></i>
                                         <div class="info-meta">
-                                            <h5>كفاءة الوقود في المدينة</h5>
-                                            <span class="font-rubik">{{ $car->mpge_city }} ميل/جالون</span>
+                                            <h6>كفاءة في المدينة</h6>
+                                            <span class="font-rubik h6">{{ $car->mpge_city }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -240,25 +240,25 @@
                         <div class="card-body table-borderless">
                             <h4 class="mb-4 text-right">مواصفات السيارة</h4>
 
-                            <div class="d-flex align-items-center justify-content-between mb-3">
+                            <div class="d-flex align-items-center justify-content-between mb-3 text-right">
                                 <div class="text-start table-tag"><i class="fa fa-check tabel-icon-check" aria-hidden="true"></i> عدد دورات الشحن المتوقعة </div>
-                                <h5 class="text-end">{{ $car->battery_cycles }} </h5>
+                                <h6 class="text-end">{{ $car->battery_cycles }} </h6>
                             </div>
-                            <div class="d-flex align-items-center justify-content-between mb-3">
+                            <div class="d-flex align-items-center justify-content-between mb-3 text-right">
                                 <div class="text-start table-tag"><i class="fa fa-check tabel-icon-check" aria-hidden="true"></i> ضمان البطارية </div>
-                                <h5 class="text-end">{{ $car->battery_warranty }} </h5>
+                                <h6 class="text-end">{{ $car->battery_warranty }} </h6>
                             </div>
-                            <div class="d-flex align-items-center justify-content-between mb-3">
+                            <div class="d-flex align-items-center justify-content-between mb-3 text-right">
                                 <div class="text-start table-tag"><i class="fa fa-check tabel-icon-check" aria-hidden="true"></i> معدل تدهور البطارية السنوي </div>
-                                <h5 class="text-end">{{ $car->battery_degradation_rate }}% </h5>
+                                <h6 class="text-end">{{ $car->battery_degradation_rate }}% </h6>
                             </div>
-                            <div class="d-flex align-items-center justify-content-between mb-3">
+                            <div class="d-flex align-items-center justify-content-between mb-3 text-right">
                                 <div class="text-start table-tag"><i class="fa fa-check tabel-icon-check" aria-hidden="true"></i> فولتية البطارية </div>
-                                <h5 class="text-end">{{ $car->battery_voltage }} فولت </h5>
+                                <h6 class="text-end">{{ $car->battery_voltage }} فولت </h6>
                             </div>
-                            <div class="d-flex align-items-center justify-content-between mb-3">
+                            <div class="d-flex align-items-center justify-content-between mb-3 text-right">
                                 <div class="text-start table-tag"><i class="fa fa-check tabel-icon-check" aria-hidden="true"></i> استهلاك الطاقة لكل 100 كم </div>
-                                <h5 class="text-end">{{ $car->power_consumption_kwh_100km }} كيلوواط ساعة </h5>
+                                <h6 class="text-end">{{ $car->power_consumption_kwh_100km }} كيلوواط ساعة </h6>
                             </div>
                         </div>
                     </div>
@@ -269,25 +269,25 @@
                         <div class="card-body table-borderless">
                             <h4 class="mb-4 text-right">مواصفات السيارة</h4>
 
-                            <div class="d-flex align-items-center justify-content-between mb-3">
+                            <div class="d-flex align-items-center justify-content-between mb-3 text-right">
                                 <div class="text-start table-tag"><i class="fa fa-check tabel-icon-check" aria-hidden="true"></i> التسارع من 0 إلى 100 كم/ساعة </div>
-                                <h5 class="text-end">{{ $car->acceleration }} ث </h5>
+                                <h6 class="text-end">{{ $car->acceleration }} ث </h6>
                             </div>
-                            <div class="d-flex align-items-center justify-content-between mb-3">
+                            <div class="d-flex align-items-center justify-content-between mb-3 text-right">
                                 <div class="text-start table-tag"><i class="fa fa-check tabel-icon-check" aria-hidden="true"></i> السرعة القصوى </div>
-                                <h5 class="text-end">{{ $car->top_speed }} كم/س </h5>
+                                <h6 class="text-end">{{ $car->top_speed }} كم/س </h6>
                             </div>
-                            <div class="d-flex align-items-center justify-content-between mb-3">
+                            <div class="d-flex align-items-center justify-content-between mb-3 text-right">
                                 <div class="text-start table-tag"><i class="fa fa-check tabel-icon-check" aria-hidden="true"></i> المدى </div>
-                                <h5 class="text-end">{{ $car->range_km }} كم </h5>
+                                <h6 class="text-end">{{ $car->range_km }} كم </h6>
                             </div>
-                            <div class="d-flex align-items-center justify-content-between mb-3">
+                            <div class="d-flex align-items-center justify-content-between mb-3 text-right">
                                 <div class="text-start table-tag"><i class="fa fa-check tabel-icon-check" aria-hidden="true"></i> إجمالي الطاقة </div>
-                                <h5 class="text-end">{{ $car->total_power }} كيلوواط ({{ $car->total_power_ps }} حصان) </h5>
+                                <h6 class="text-end">{{ $car->total_power }} كيلوواط ({{ $car->total_power_ps }} حصان) </h6>
                             </div>
-                            <div class="d-flex align-items-center justify-content-between mb-3">
+                            <div class="d-flex align-items-center justify-content-between mb-3 text-right">
                                 <div class="text-start table-tag"><i class="fa fa-check tabel-icon-check" aria-hidden="true"></i> إجمالي عزم الدوران </div>
-                                <h5 class="text-end">{{ $car->total_torque }} نيوتن متر </h5>
+                                <h6 class="text-end">{{ $car->total_torque }} نيوتن متر </h6>
                             </div>
 
 
@@ -301,25 +301,25 @@
                         <div class="card-body table-borderless">
                             <h4 class="mb-4 text-right">مواصفات البطارية</h4>
 
-                            <div class="d-flex align-items-center justify-content-between mb-3">
+                            <div class="d-flex align-items-center justify-content-between mb-3 text-right">
                                 <div class="text-start table-tag"><i class="fa fa-check tabel-icon-check" aria-hidden="true"></i> عدد وحدات البطارية</div>
-                                <h5 class="text-end">{{ $car->battery_modules }}</h5>
+                                <h6 class="text-end">{{ $car->battery_modules }}</h6>
                             </div>
-                            <div class="d-flex align-items-center justify-content-between mb-3">
+                            <div class="d-flex align-items-center justify-content-between mb-3 text-right">
                                 <div class="text-start table-tag"><i class="fa fa-check tabel-icon-check" aria-hidden="true"></i> عدد خلايا البطارية</div>
-                                <h5 class="text-end">{{ $car->battery_cells }}</h5>
+                                <h6 class="text-end">{{ $car->battery_cells }}</h6>
                             </div>
-                            <div class="d-flex align-items-center justify-content-between mb-3">
+                            <div class="d-flex align-items-center justify-content-between mb-3 text-right">
                                 <div class="text-start table-tag"><i class="fa fa-check tabel-icon-check" aria-hidden="true"></i> نظام إدارة حرارة البطارية</div>
-                                <h5 class="text-end">{{ $car->battery_thermal_management }}</h5>
+                                <h6 class="text-end">{{ $car->battery_thermal_management }}</h6>
                             </div>
-                            <div class="d-flex align-items-center justify-content-between mb-3">
+                            <div class="d-flex align-items-center justify-content-between mb-3 text-right">
                                 <div class="text-start table-tag"><i class="fa fa-check tabel-icon-check" aria-hidden="true"></i> عدد الوسائد الهوائية</div>
-                                <h5 class="text-end">{{ $car->airbag_count }}</h5>
+                                <h6 class="text-end">{{ $car->airbag_count }}</h6>
                             </div>
-                            <div class="d-flex align-items-center justify-content-between mb-3">
+                            <div class="d-flex align-items-center justify-content-between mb-3 text-right">
                                 <div class="text-start table-tag"><i class="fa fa-check tabel-icon-check" aria-hidden="true"></i> تصنيف اختبار التصادم</div>
-                                <h5 class="text-end">{{ $car->crash_test_rating }}</h5>
+                                <h6 class="text-end">{{ $car->crash_test_rating }}</h6>
                             </div>
 
                         </div>
@@ -331,25 +331,25 @@
                     <div class="card border-0">
                         <div class="card-body table-borderless">
                             <h4 class="mb-4 text-right">مواصفات الأمان</h4>
-                            <div class="d-flex align-items-center justify-content-between mb-3">
+                            <div class="d-flex align-items-center justify-content-between mb-3 text-right">
                                 <div class="text-start table-tag"><i class="fa fa-check tabel-icon-check" aria-hidden="true"></i> نظام تنبيه المشاة</div>
-                                <h5 class="text-end">{{ $car->has_pedestrian_alert ? 'نعم' : 'لا' }}</h5>
+                                <h6 class="text-end">{{ $car->has_pedestrian_alert ? 'نعم' : 'لا' }}</h6>
                             </div>
-                            <div class="d-flex align-items-center justify-content-between mb-3">
+                            <div class="d-flex align-items-center justify-content-between mb-3 text-right">
                                 <div class="text-start table-tag"><i class="fa fa-check tabel-icon-check" aria-hidden="true"></i> نظام حماية البطارية</div>
-                                <h5 class="text-end">{{ $car->has_battery_protection ? 'نعم' : 'لا' }}</h5>
+                                <h6 class="text-end">{{ $car->has_battery_protection ? 'نعم' : 'لا' }}</h6>
                             </div>
-                            <div class="d-flex align-items-center justify-content-between mb-3">
+                            <div class="d-flex align-items-center justify-content-between mb-3 text-right">
                                 <div class="text-start table-tag"><i class="fa fa-check tabel-icon-check" aria-hidden="true"></i> نظام مغادرة المسار</div>
-                                <h5 class="text-end">{{ $car->has_lane_departure ? 'نعم' : 'لا' }}</h5>
+                                <h6 class="text-end">{{ $car->has_lane_departure ? 'نعم' : 'لا' }}</h6>
                             </div>
-                            <div class="d-flex align-items-center justify-content-between mb-3">
+                            <div class="d-flex align-items-center justify-content-between mb-3 text-right">
                                 <div class="text-start table-tag"><i class="fa fa-check tabel-icon-check" aria-hidden="true"></i> نظام كشف النقاط العمياء</div>
-                                <h5 class="text-end">{{ $car->has_blind_spot ? 'نعم' : 'لا' }}</h5>
+                                <h6 class="text-end">{{ $car->has_blind_spot ? 'نعم' : 'لا' }}</h6>
                             </div>
-                            <div class="d-flex align-items-center justify-content-between mb-3">
+                            <div class="d-flex align-items-center justify-content-between mb-3 text-right">
                                 <div class="text-start table-tag"><i class="fa fa-check tabel-icon-check" aria-hidden="true"></i> نظام الفرامل الطارئ</div>
-                                <h5 class="text-end">{{ $car->has_emergency_brake ? 'نعم' : 'لا' }}</h5>
+                                <h6 class="text-end">{{ $car->has_emergency_brake ? 'نعم' : 'لا' }}</h6>
                             </div>
 
 
@@ -363,38 +363,38 @@
                         <div class="card-body table-borderless">
                             <h4 class="mb-4 text-right">ابعاد السيارة</h4>
 
-                            <div class="d-flex align-items-center justify-content-between mb-3">
+                            <div class="d-flex align-items-center justify-content-between mb-3 text-right">
                                 <div class="text-start table-tag"><i class="fa fa-check tabel-icon-check" aria-hidden="true"></i> الطول بالملم</div>
-                                <h5 class="text-end">{{ $car->length_mm }} مم </h5>
+                                <h6 class="text-end">{{ $car->length_mm }} مم </h6>
                             </div>
 
-                            <div class="d-flex align-items-center justify-content-between mb-3">
+                            <div class="d-flex align-items-center justify-content-between mb-3 text-right">
                                 <div class="text-start table-tag"><i class="fa fa-check tabel-icon-check" aria-hidden="true"></i> العرض بالملم</div>
-                                <h5 class="text-end">{{ $car->width_mm }} مم </h5>
+                                <h6 class="text-end">{{ $car->width_mm }} مم </h6>
                             </div>
-                            <div class="d-flex align-items-center justify-content-between mb-3">
+                            <div class="d-flex align-items-center justify-content-between mb-3 text-right">
                                 <div class="text-start table-tag"><i class="fa fa-check tabel-icon-check" aria-hidden="true"></i> قاعدة العجلات بالملم</div>
-                                <h5 class="text-end">{{ $car->wheelbase_mm }} مم </h5>
+                                <h6 class="text-end">{{ $car->wheelbase_mm }} مم </h6>
                             </div>
-                            <div class="d-flex align-items-center justify-content-between mb-3">
+                            <div class="d-flex align-items-center justify-content-between mb-3 text-right">
                                 <div class="text-start table-tag"><i class="fa fa-check tabel-icon-check" aria-hidden="true"></i> الارتفاع عن الأرض</div>
-                                <h5 class="text-end">{{ $car->ground_clearance_mm }} مم </h5>
+                                <h6 class="text-end">{{ $car->ground_clearance_mm }} مم </h6>
                             </div>
-                            <div class="d-flex align-items-center justify-content-between mb-3">
+                            <div class="d-flex align-items-center justify-content-between mb-3 text-right">
                                 <div class="text-start table-tag"><i class="fa fa-check tabel-icon-check" aria-hidden="true"></i> حجم صندوق الأمتعة باللتر</div>
-                                <h5 class="text-end">{{ $car->cargo_volume_l }} لتر </h5>
+                                <h6 class="text-end">{{ $car->cargo_volume_l }} لتر </h6>
                             </div>
-                            <div class="d-flex align-items-center justify-content-between mb-3">
+                            <div class="d-flex align-items-center justify-content-between mb-3 text-right">
                                 <div class="text-start table-tag"><i class="fa fa-check tabel-icon-check" aria-hidden="true"></i> وزن السيارة فارغة</div>
-                                <h5 class="text-end">{{ $car->curb_weight_kg }} كجم </h5>
+                                <h6 class="text-end">{{ $car->curb_weight_kg }} كجم </h6>
                             </div>
-                            <div class="d-flex align-items-center justify-content-between mb-3">
+                            <div class="d-flex align-items-center justify-content-between mb-3 text-right">
                                 <div class="text-start table-tag"><i class="fa fa-check tabel-icon-check" aria-hidden="true"></i> الوزن الإجمالي المسموح</div>
-                                <h5 class="text-end">{{ $car->gross_weight_kg }} كجم </h5>
+                                <h6 class="text-end">{{ $car->gross_weight_kg }} كجم </h6>
                             </div>
-                            <div class="d-flex align-items-center justify-content-between mb-3">
+                            <div class="d-flex align-items-center justify-content-between mb-3 text-right">
                                 <div class="text-start table-tag"><i class="fa fa-check tabel-icon-check" aria-hidden="true"></i> سعة الحمولة</div>
-                                <h5 class="text-end">{{ $car->payload_capacity_kg }} كجم </h5>
+                                <h6 class="text-end">{{ $car->payload_capacity_kg }} كجم </h6>
                             </div>
                         </div>
                     </div>

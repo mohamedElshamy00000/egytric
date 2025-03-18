@@ -2,7 +2,7 @@
 
     <div class="main-sidebar-nav">
         <div class="offcanvas-header d-flex justify-content-between align-items-center pb-4">
-            <button type="button" class="close-btn tran3s"><i class="fa fa-times" aria-hidden="true"></i></button>
+            <button type="button" class="close-btn tran3s"><i class="fa fa-times text-dark" aria-hidden="true"></i></button>
             <div class="logo"><a href="{{ route('home') }}" class="d-block"><img src="{{ asset('frontend/images/logo/Artboard 23.png') }}" width="130px" alt=""></a></div>
         </div>
 

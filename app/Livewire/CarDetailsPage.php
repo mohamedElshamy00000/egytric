@@ -36,6 +36,11 @@ class CarDetailsPage extends Component
     }
     public function OrderThisCar($car_id, $order_type)
     {
+        // Check if user is authenticated
+        if (!auth()->check()) {
+            return redirect()->route('register');
+        }
+
         $car = ElectricCar::find($car_id);
         if(!$car){
             $this->alert('error', 'السيارة غير موجودة');
@@ -55,9 +60,11 @@ class CarDetailsPage extends Component
             'note' => '',
             'electric_car_id' => $car_id,
         ]);
+
         $this->alert('success', 'تم إنشاء الطلب بنجاح');
         return redirect()->route('my-car-orders');
     }
+
     public function render()
     {
 

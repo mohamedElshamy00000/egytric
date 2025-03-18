@@ -20,7 +20,7 @@
                     <div class="col-lg-4 col-sm-6 d-lg-flex">
                         <div class="address-info">
                             <div class="title">العنوان</div>
-                            <p class="font-rubik">Dhaka, Kawran Bazar <br> 1201 Metro</p>
+                            <p class="font-rubik"></p>
                         </div> <!-- /.address-info -->
                     </div>
 
@@ -34,7 +34,7 @@
                     <div class="col-lg-4 col-sm-6 d-lg-flex">
                         <div class="address-info">
                             <div class="title">تابعنا علي</div>
-                            <p class="font-rubik">Find on social media</p>
+                            <p class="font-rubik"></p>
                             <ul class="d-flex justify-content-center">
 
                                 @foreach($contactData as $social)
@@ -83,7 +83,6 @@
                             <button class="theme-btn-six lg" wire:loading.attr="disabled">
                                 ارسال طلب التواصل
                                 <span class="spinner-border spinner-border-sm text-white" wire:loading wire:target="submitForm"></span>
-
                             </button>
                         </div>
 

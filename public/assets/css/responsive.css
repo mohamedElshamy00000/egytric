@@ -1,11 +1,11 @@
 /* Responsive CSS Document */
 
-/* 
+/*
     Created on   : 19/06/2021.
     Theme Name   : Deski-Saas & Software HTML Template
     Version      : 1.0.
     Developed by : (me@heloshape.com) / (www.me.heloshape.com)
-   
+
 */
 @media (min-width: 1350px) {
   .lg-container .container {max-width: 1320px;}
@@ -1012,7 +1012,7 @@
 }
 /*(max-width: 767px)*/
 
-@media (min-width: 768px) { 
+@media (min-width: 768px) {
   #doc-sidebar-nav {display: block !important;}
 }
 
@@ -1183,7 +1183,7 @@
   .hero-banner-twelve>.shapes,.fancy-feature-thirty .wrapper .shapes,
   .fancy-short-banner-fourteen .shapes {display: none;}
   .title-style-thirteen h2 {font-size: 38px;}
-  .main-sidebar-nav {width: 95%; max-width: 320px;}
+  .main-sidebar-nav {width: 56%; max-width: 320px;}
   .product-details-one .product-review-tab .nav-tabs .nav-link {margin: 0; width: 100%; padding: 10px 0;}
   .product-details-one .product-review-tab .nav-tabs .nav-item {width: 100%;}
   .breadcrumb-style-one .breadcrumb-item a, .breadcrumb-style-one .breadcrumb-item {font-size: 15px;}

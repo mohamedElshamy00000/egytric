@@ -148,7 +148,7 @@
                     <div class=" col-sm-6 aos-init aos-animate" data-aos="fade-up">
                         <div class="block-style-twentySeven py-4">
                             <div class="icon d-flex align-items-center justify-content-center m-0 h4 text-muted"><i class="fas fa-bolt"></i></div>
-                            <h5 class="font-gordita mt-3">تجربة قيادة أكثر هدو ًءا وراحة</h5>
+                            <h5 class="font-gordita mt-3">تجربة قيادة أكثر هدوءا وراحة</h5>
                         </div>
                     </div>
 
@@ -159,12 +159,12 @@
                         </div>
                     </div>
 
-                    <div class=" col-sm-6 aos-init aos-animate" data-aos="fade-up">
+                    {{-- <div class=" col-sm-6 aos-init aos-animate" data-aos="fade-up">
                         <div class="block-style-twentySeven py-4">
                             <div class="icon d-flex align-items-center justify-content-center m-0 h4 text-muted"><i class="fas fa-truck-moving"></i></div>
                             <h5 class="font-gordita mt-3">دعم متزايد للبنية التحتية في مصر</h5>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
@@ -188,7 +188,7 @@
                         <div class="text">
                             <h4>استشارات متخصصة</h4>
                             <p>احصل على المشورة الفنية والمالية لتسهيل اقتناء سيارتك الكهربائية بأفضل الشروط والأسعار.</p>
-                            <a href="service-detailsV1.html" class="tran3s"><img src="{{ asset('frontend/images/icon/182.svg') }}" alt=""></a>
+                            <a href="#" class="tran3s"><img src="{{ asset('frontend/images/icon/182.svg') }}" alt=""></a>
                         </div>
                     </div> <!-- /.block-style-thirtyTwo -->
                 </div>
@@ -200,7 +200,7 @@
                             <p>
                                 استخدم خدمة تخطيط الرحلات لتحديد أفضل مسارات القيادة وتحديد مواقع محطات الشحن على طول الطريق لرحلة خالية من القلق.
                             </p>
-                            <a href="service-detailsV1.html" class="tran3s"><img src="{{ asset('frontend/images/icon/182.svg') }}" alt=""></a>
+                            <a href="#" class="tran3s"><img src="{{ asset('frontend/images/icon/182.svg') }}" alt=""></a>
                         </div>
                     </div> <!-- /.block-style-thirtyTwo -->
                 </div>
@@ -212,7 +212,7 @@
                             <p>
                                 استفد من شراكاتنا مع أفضل محطات الشحن الكهربائي لضمان توفير وصول مريح وسريع لشحن سيارتك في مصر.
                             </p>
-                            <a href="service-detailsV1.html" class="tran3s"><img src="{{ asset('frontend/images/icon/182.svg') }}" alt=""></a>
+                            <a href="#" class="tran3s"><img src="{{ asset('frontend/images/icon/182.svg') }}" alt=""></a>
                         </div>
                     </div> <!-- /.block-style-thirtyTwo -->
                 </div>
@@ -222,7 +222,7 @@
                         <div class="text">
                             <h4>دعم فني عند الطلب</h4>
                             <p>تمتع بخدمة دعم فني سريعة وف ّعالة لمساعدتك في الحلول الفورية لأي استفسارات أو مشاكل قد تواجه سيارتك الكهربائية.</p>
-                            <a href="service-detailsV1.html" class="tran3s"><img src="{{ asset('frontend/images/icon/182.svg') }}" alt=""></a>
+                            <a href="#" class="tran3s"><img src="{{ asset('frontend/images/icon/182.svg') }}" alt=""></a>
                         </div>
                     </div> <!-- /.block-style-thirtyTwo -->
                 </div>
@@ -246,7 +246,7 @@
                 <div class="col-md-3 col-sm-6">
                     <div class="product-card" car-price="{{ $eCar->offer_price }}" car-body="{{ $eCar->body_type }}">
                         <div class="img-holder">
-                            <a href="" class="d-flex align-items-center justify-content-center h-100">
+                            <a href="{{ route('cars.show', $eCar->slug) }}" class="d-flex align-items-center justify-content-center h-100">
                                 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 
                                     <div class="carousel-inner">
@@ -360,7 +360,7 @@
                     <div class="col-md-3 col-sm-6">
                         <div class="product-card">
                             <div class="img-holder text-center mb-3">
-                                <a href="shop-details.html" class="d-flex align-items-center justify-content-center h-100">
+                                <a href="{{ route('shop.products.show', $product->slug) }}" class="d-flex align-items-center justify-content-center h-100">
                                     <img src="{{ asset('storage/'.$product->images[0]) }}" alt="" class="product-img tran4s" style="max-width:100%;">
                                 </a>
                             </div>
